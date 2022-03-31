@@ -6,23 +6,32 @@ import { UpdateSurveyDto } from './dto/update-survey.dto';
 @Injectable()
 export class SurveyService {
   constructor(private readonly prisma: PrismaService) {}
-  create(createSurveyDto: CreateSurveyDto) {
-    return 'This action adds a new survey';
+  create(data: CreateSurveyDto) {
+    return this.prisma.survey.create({ data });
   }
 
   findAll() {
-    return `This action returns all survey`;
+    return this.prisma.survey.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} survey`;
+    return this.prisma.survey.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 
-  update(id: number, updateSurveyDto: UpdateSurveyDto) {
-    return `This action updates a #${id} survey`;
+  update(id: number, data: UpdateSurveyDto) {
+    return this.prisma.survey.update({
+      where: { id },
+      data,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} survey`;
+    return this.prisma.survey.delete({
+      where: { id },
+    });
   }
 }
