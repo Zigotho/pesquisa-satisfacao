@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "Response_type" ALTER COLUMN "created_at" DROP NOT NULL,
+ALTER COLUMN "created_at" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "Survey" ALTER COLUMN "created_at" DROP NOT NULL,
+ALTER COLUMN "created_at" SET DEFAULT CURRENT_TIMESTAMP;

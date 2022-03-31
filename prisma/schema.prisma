@@ -14,7 +14,7 @@ model Survey {
   id               Int               @id @default(autoincrement())
   name             String
   description      String
-  created_at       DateTime
+  created_at       DateTime?       @default(now())
   is_active        Boolean
   survey_questions Survey_question[]
 }
@@ -39,7 +39,7 @@ model Response_type {
   id                     Int                      @id @default(autoincrement())
   title                  String
   description            String
-  created_at             DateTime
+  created_at             DateTime?       @default(now())
   question               Question[]
   response_type_response Response_type_response[]
 }
