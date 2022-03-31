@@ -9,3 +9,52 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Survey {
+  id               Int               @id @default(autoincrement())
+  name             String
+  description      String
+  created_at       DateTime
+  is_active        Boolean
+  survey_questions Survey_question[]
+}
+
+model Survey_question {
+  id          Int      @id @default(autoincrement())
+  survey      Survey   @relation(fields: [survey_id], references: [id])
+  survey_id   Int
+  question    Question @relation(fields: [question_id], references: [id])
+  question_id Int
+}
+
+model Question {
+  id               Int               @id @default(autoincrement())
+  text             String
+  response_type    Response_type     @relation(fields: [response_type_id], references: [id])
+  response_type_id Int
+  survey_questions Survey_question[]
+}
+
+model Response_type {
+  id                     Int                      @id @default(autoincrement())
+  title                  String
+  description            String
+  created_at             DateTime
+  question               Question[]
+  response_type_response Response_type_response[]
+}
+
+model Response_type_response {
+  id               Int           @id @default(autoincrement())
+  response_type    Response_type @relation(fields: [response_type_id], references: [id])
+  response_type_id Int
+  response         Response      @relation(fields: [response_id], references: [id])
+  response_id      Int
+  value            Float
+}
+
+model Response {
+  id                     Int                      @id @default(autoincrement())
+  text                   String
+  response_type_response Response_type_response[]
+}
