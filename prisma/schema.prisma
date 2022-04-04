@@ -58,7 +58,3 @@ model Response {
   text                   String
   response_type_response Response_type_response[]
 }
-
-model teste {
-  id Int @id @default(autoincrement())
-}
